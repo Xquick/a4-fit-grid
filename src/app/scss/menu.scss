@@ -2,15 +2,13 @@ body, .ui-content {
     background: #e3e9ee;
 }
 .ui-content{
-    margin-left: $menu-width;
     overflow: auto;
     height: 100%;
 }
 $menu-class: '.main-menu';
 
-main-menu md-sidenav#{$menu-class} {
-    background: $color-1;
-    position: fixed !important;
+.mat-sidenav#{$menu-class} {
+    background-color: $color-1;
     width: $menu-width;
     height: 100%;
     padding-top: 10px;

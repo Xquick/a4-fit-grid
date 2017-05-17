@@ -2,4 +2,10 @@ $content-class: '.ui-content';
 
 #{$content-class} {
     background: $color-white;
+    padding: 10px;
+}
+
+
+.mat-sidenav-backdrop.mat-sidenav-shown{
+    display: none;
 }

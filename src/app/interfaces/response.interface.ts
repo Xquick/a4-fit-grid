@@ -1,7 +1,8 @@
 import {Exercise} from "../dto/exercise.dto";
+import {Response} from "@angular/http";
 
-export namespace json {
-    export interface IExerciseList {
+export namespace response {
+    export interface IExerciseList extends Response{
         data: {
             exerciseList: IExercise[]
         }
@@ -25,7 +26,7 @@ export namespace json {
         setList: ISet[]
     }
 
-    export interface IWorkoutList {
+    export interface IWorkoutList extends Response{
         data: IWorkout[];
     }
 
@@ -46,7 +47,4 @@ export namespace json {
         schedule: IWorkoutSchedule[]
     }
 
-    export interface IWorkoutHistoryList {
-        data: IWorkoutHistory[]
-    }
 }

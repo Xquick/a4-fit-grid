@@ -1,11 +1,11 @@
 import {Component} from "@angular/core";
 @Component({
     selector: 'main-menu',
-    templateUrl: './menu.template.html'
+    templateUrl: './main-menu.template.html'
 })
 
-export class MainMenu {
+export class MainMenuComponent {
     constructor() {
-        
+
     }
 }

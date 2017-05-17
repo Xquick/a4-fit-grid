@@ -1,0 +1,13 @@
+{
+  "title.grid": "Grid",
+  "title.plans": "Moje workouty",
+  "date.today": "Dnes",
+  "date.yesterday": "Včera",
+  "menu.grid": "Grid",
+  "menu.plans": "Plány",
+  "new-workout.open": "Otevřít",
+  "new-workout.close": "Zavřít",
+  "new-workout.header": "Název plánu",
+  "new-workout.datepicker.placeholder": "Datum plánu",
+  "new-workout.save": "Uložit plán"
+}

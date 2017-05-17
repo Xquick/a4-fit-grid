@@ -4,20 +4,20 @@ import {Directive, Renderer2, ElementRef} from "@angular/core";
     selector: '[autoGrow]',
     host: {
         '(focus)': 'onFocus()',
-        '(blur)': 'onBLur()'
+        '(blur)': 'onBlur()'
     }
 })
 
 export class AutoGrowDirective {
-    constructor(private element: ElementRef, private render: Renderer2) {
-        console.log(element);
+    constructor(private element: ElementRef,
+                private render: Renderer2) {
     }
 
     onFocus() {
-        this.render.setStyle(this.element, 'width', '200');
+        this.render.setStyle(this.element.nativeElement, 'width', '200px');
     }
 
     onBlur() {
-        this.render.setStyle(this.element, 'width', '100');
+        this.render.setStyle(this.element.nativeElement, 'width', '100px');
     }
 }

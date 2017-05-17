@@ -1,12 +1,15 @@
-<md-sidenav md-component-id="left" md-is-locked-open="true" layout="column" layout-align="space-between center"
-            flex="none" class="md-sidenav-left main-menu">
-    <div flex="100" class="ui-list ui-list--plain">
-        <li><a ui-sref="grid" title="grid_header" class="main-menu-item"><i class="material-icons main-menu-item-icon">assignment</i>
-            <div ng-bind="'menu.grid'|translate" class="main-menu-item-label"></div>
-        </a></li>
-        <li><a ui-sref="plans" title="grid_header" class="main-menu-item"><i class="material-icons main-menu-item-icon">fitness_center</i>
-            <div ng-bind="'menu.plans'|translate" class="main-menu-item-label"></div>
-        </a></li>
-    </div>
-</md-sidenav>
-<div layout="column" layout-align="space-between center" flex="none" class="main-menu"></div>
+<div flex="100" class="ui-list ui-list--plain">
+    <li>
+        <a routerLink="grid" title="grid_header" class="main-menu-item"><i
+                class="material-icons main-menu-item-icon">assignment</i>
+            <div class="main-menu-item-label">{{'menu.grid'|translate}}</div>
+        </a>
+    </li>
+
+    <li>
+        <a routerLink="plans" title="grid_header" class="main-menu-item"><i
+                class="material-icons main-menu-item-icon">fitness_center</i>
+            <div class="main-menu-item-label">{{'menu.plans'|translate}}</div>
+        </a>
+    </li>
+</div>

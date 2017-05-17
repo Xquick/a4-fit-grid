@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/theming';
+@import "../node_modules/ng2-flex-layout/dist/ng2-flex-layout.css";
+@include mat-core();
+$primary: mat-palette($mat-blue-grey, 500);
+$accent:  mat-palette($mat-amber, A100);
+$warn:    mat-palette($mat-orange, A200);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+
+@import 'app/scss/mixins';
+@import 'app/scss/variables';
+
+
+@import 'app/scss/content';
+@import 'app/scss/component';
+@import 'app/scss/button';
+@import 'app/scss/general';
+@import 'app/scss/list';
+@import 'app/scss/icon';
+@import 'app/scss/menu';
+@import 'app/scss/components/filter';
+@import 'app/scss/components/workout';
+@import 'app/scss/dialog/md-dialog';
+@import 'app/scss/grid';
+@import 'app/scss/table';
+@import 'app/scss/dragDrop';

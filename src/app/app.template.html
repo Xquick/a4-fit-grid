@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<md-sidenav-container>
+    <md-sidenav #left align="start"
+                mode="push"
+                opened="true"
+                fxLayout="column"
+                fxLayoutAlign="space-between center"
+                class="md-sidenav-left main-menu">
+        <main-menu></main-menu>
+    </md-sidenav>
+
+    <md-sidenav #sidenav align="end">
+        <div workout></div>
+    </md-sidenav>
+    <div fxLayout="column" class="ui-content">
+        <div fxLayout="row" fxFlex="100%">
+            <button color="primary"
+                    md-raised-button
+                    class="fixed fixed--right-top"
+                    (click)="sidenav.toggle()"
+                    aria-label="close">{{'new-workout.open'|translate}}
+            </button>
+        </div>
+        <div fxLayout="row">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</md-sidenav-container>

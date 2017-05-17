@@ -1,49 +1,44 @@
-<div id="workout">
-    <md-button
-            class="fixed fixed--right-top"
-            (click)="toggleWorkout()"
-            aria-label="close">{{'new-workout.open'|translate}}
-    </md-button>
+<md-toolbar fxLayout="row">
+    <input [(ngModel)]="currentWorkout.name"
+           [placeholder]="'new-workout.header'|translate" flex="80" layout="column"/>
+    <div fxFlex="20" fxLayoutAlign="center center" layout="column">
+        <i class="material-icons" (click)="toggleWorkout()">close</i>
+    </div>
+</md-toolbar>
 
-    <md-sidenav class="md-sidenav-right" md-component-id="right" md-disable-backdrop="md-disable-backdrop"
-                md-is-open="true" md-whiteframe="4">
+<md-input-container>
+    <input mdInput [(ngModel)]="workoutDate" [mdDatepicker]="picker"
+           [placeholder]="'new-workout.datepicker.placeholder'|translate">
+    <button mdSuffix [mdDatepickerToggle]="picker"></button>
+</md-input-container>
+<md-datepicker #picker></md-datepicker>
 
-        <md-toolbar layout="row"><input [(model)]="currentWorkout.name"
-                                        placeholder="{{'new-workout.header'|translate}}" flex="80" layout="column"/>
-            <div flex="20" layout-align="center center" layout="column"><i class="material-icons"
-                                                                           (click)="toggleWorkout()">close</i>
+<ul>
+    <li class="md-table-content-row"
+        *ngFor="let exercise of currentWorkout.exerciseList; let i = index;">
+
+        <div class="height-100" flex="flex" layout="row" layout-align="start center">
+            <div class="handle" flex="10" layout="column"><i class="material-icons">drag_handle</i>
             </div>
-        </md-toolbar>
-
-        <md-content>
-            <md-datepicker [(model)]="workoutDate"
-                           md-placeholder="{{'new-workout.datepicker.placeholder'|translate}}" aria-label=""
-                           flex="100"></md-datepicker>
-            <ul dnd-list="currentWorkout.exerciseList">
-                <li class="md-table-content-row"
-                    *ngFor="let exercise of currentWorkout.exerciseList; let $index = index;"
-                    dnd-draggable="exercise" dnd-moved="onDropExercise($index, exercise.type)"
-                    dnd-effect-allowed="move" [class.superset]="exercise.isSuperset">
-
-                    <dnd-nodrag class="height-100" flex="flex" layout="row" layout-align="start center">
-                        <div class="handle" dnd-handle="dnd-handle" flex="10" layout="column"><i class="material-icons">drag_handle</i>
-                        </div>
-                        <div flex="70" layout="column"><span class="first-letter--upper">{{exercise.name}}</span>
-                        </div>
-                        <div class="ui-icons" flex="20" layout="column"><span layout="row"><md-button
-                                class="ui-button ui-button--icon" layout="column"><i class="material-icons"
-                                                                                     (click)="toggleExerciseSuperset(exercise.id)">link</i></md-button><md-button
-                                class="ui-button ui-button--icon" layout="column"
-                                (click(="toggleExerciseInCurrentWorkout(exercise)"><i class="material-icons">delete</i></md-button></span>
-                        </div>
-                    </dnd-nodrag>
-                </li>
-            </ul>
-            <md-button class="md-raised md-primary ui-button--default"
-                       [ngIf]="currentWorkout.exerciseList.length > 0"
-                       (click)="saveWorkout()"
-                       aria-label="">{{'new-workout.save'|translate}}
-            </md-button>
-        </md-content>
-    </md-sidenav>
-</div>
+            <div flex="70" layout="column"><span class="first-letter--upper">{{exercise.name}}</span>
+            </div>
+            <div class="ui-icons" flex="20" layout="column"><span layout="row">
+                            <button md-button
+                                    class="ui-button ui-button--icon"
+                                    layout="column"><i
+                                    class="material-icons"
+                                    (click)="toggleExerciseSuperset(exercise.id)">link</i></button>
+                            <button md-button
+                                    class="ui-button ui-button--icon"
+                                    layout="column"
+                                    (click)="toggleExercise(exercise)"><i
+                                    class="material-icons">delete</i></button></span>
+            </div>
+        </div>
+    </li>
+</ul>
+<button md-button class="md-raised md-primary ui-button--default"
+        *ngIf="currentWorkout.exerciseList.length > 0"
+        (click)="saveWorkout()"
+        aria-label="">{{'new-workout.save'|translate}}
+</button>

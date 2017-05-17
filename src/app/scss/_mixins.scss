@@ -52,12 +52,7 @@
 @-moz-keyframes rotate-forever { @include rotate-forever; }
 @keyframes rotate-forever { @include rotate-forever; }
 
-@mixin keyframes($name) {
-    @-o-keyframes $name { @content };
-    @-moz-keyframes $name { @content };
-    @-webkit-keyframes $name { @content };
-    @-keyframes $name { @content };
-}
+
 @mixin animation-name($name...) {
     -o-animation-name: $name;
     -moz-animation-name: $name;
@@ -156,24 +151,7 @@
         overflow: hidden;
     }
 }
-/***/
 
-@include keyframes(grow) {
-    from {
-        -webkit-transform: scale(1);
-    }
-    to {
-        -webkit-transform: scale(2);
-    }
-}
-@include keyframes(fadeIn) {
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
-}
 
 @mixin optional-at-root($sel) {
     @at-root #{if(not &, $sel, selector-append(&, $sel))} {
