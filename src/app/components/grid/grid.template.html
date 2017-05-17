@@ -1,0 +1,42 @@
+<app-header [appTitle]="'title.grid'|translate"></app-header>
+<div id="grid">
+    <div class="exercise-type-wrapper"
+         fxLayout="row"
+         fxFlex="100"
+         ng-repeat="exerciseType in ctrl.$cacheService.exerciseListByTypes track by $index">
+
+        <div fxLayout="column" fxFlex="100">
+            <md-card>
+                <md-card-content>
+                    <h2 ng-bind="exerciseType.name" fxLayout="row"></h2>
+                    <table md-table="md-table" md-row-select="md-row-select" multiple="multiple">
+                        <thead md-head="md-head">
+                        <tr md-row="md-row">
+                            <th md-column="md-column"></th>
+                            <th md-column="md-column"></th>
+                            <th ng-repeat="day in ctrl.calendarDays" ng-bind="day.date | formatDate | translate"
+                                md-column="md-column"></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body="md-body">
+                        <tr class="exercise md-table-content-row"
+                            ng-repeat="exercise in exerciseType.exerciseList track by $index" md-row="md-row">
+                            <td md-cell="md-cell">
+                                <md-checkbox ng-checked="ctrl.$rootScope.currentWorkout.exerciseMap[exercise.id]"
+                                             aria-label="checkbox"
+                                             ng-click="ctrl.toggleExerciseInCurrentWorkout(exercise)"></md-checkbox>
+                            </td>
+                            <td class="exercise" md-cell="md-cell" ng-click="ctrl.openExerciseDetailDialog($event,1)">
+                                <span class="first-letter--upper" ng-bind="exercise.name"></span></td>
+                            <td class="day" ng-repeat="day in ctrl.calendarDays track by $index" md-cell="md-cell">
+                                <md-checkbox ng-checked="ctrl.didExerciseOccurreOnThisDay(exercise, day)"
+                                             aria-label="checkbox" disabled="true"></md-checkbox>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>

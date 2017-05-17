@@ -1,0 +1,45 @@
+$buttonclass: ".ui-button";
+// namespace class for buttons
+
+#{$buttonclass} {
+    @mixin buttonFontColor($color) {
+        & #{$buttonclass} {
+            &__text {
+                color: $color;
+            }
+        }
+    }
+
+    min-width: 0;
+    height: $button-height;
+    margin: 0;
+    padding: 0;
+    background-color: $color-white;
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+
+    &--default.md-button{
+        background: $color-1;
+        background-color: $color-1;
+        color: white;
+        md-icon{
+            color: $color-white;
+        }
+    }
+
+    &--icon.md-button{
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        padding: 5px;
+
+        i {
+            color: $color-1;
+        }
+    }
+}
+.md-button{
+    &.md-icon-button{
+        height: auto;
+        width: auto;
+    }
+}

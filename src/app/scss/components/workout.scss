@@ -1,0 +1,42 @@
+
+#workout {
+    md-toolbar:not(.md-menu-toolbar) {
+        background: $color-1;
+
+    }
+
+    md-content{
+        overflow: visible;
+    }
+
+    ul{
+        padding: 0;
+        margin: 0;
+    }
+
+    h3{
+        padding: 10px;
+        margin: 0;
+        text-transform: capitalize;
+        background: $color-2;
+        color: white;
+    }
+    .md-datepicker-input-container{
+        border: none;
+    }
+
+    md-toolbar{
+        input{
+            background: $color-1;
+            border: none;
+            padding-left: 10px;
+            color: white;
+            @include placeholder{
+                color: white;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

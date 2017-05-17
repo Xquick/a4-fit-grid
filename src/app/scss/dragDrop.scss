@@ -1,0 +1,34 @@
+#workout [dnd-list] {
+  .dndDraggingSource {
+    display: none;
+  }
+
+  .dndPlaceholder {
+    background-color: #ddd;
+    display: block;
+    min-height: 42px;
+  }
+
+  li {
+    &.selected {
+      background-color: #dff0d8;
+      color: #3c763d;
+    }
+    [dnd-handle] {
+      margin-right: 5px;
+    }
+    span {
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
+    background-color: #fff;
+    border: solid #ddd;
+    border-width: 1px 0 1px 0;
+    display: block;
+    padding: 0 10px;
+    margin-bottom: -1px;
+    height: 45px;
+    box-sizing: border-box;
+  }
+}

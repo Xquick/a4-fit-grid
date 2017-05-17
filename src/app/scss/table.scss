@@ -1,0 +1,7 @@
+.md-table{
+    tr:nth-child(even){
+        td{
+            background-color: rgba(87, 103, 121, 0.03);
+        }
+    }
+}

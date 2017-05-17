@@ -1,0 +1,9 @@
+$list-class: '.ui-list';
+
+#{$list-class} {
+    padding: 0;
+    &--plain {
+        list-style: none;
+    }
+    
+}

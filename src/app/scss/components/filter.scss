@@ -1,0 +1,9 @@
+$filter-class: '.ui-filter';
+
+#{$filter-class} {
+    padding: 5px;
+
+    md-slider {
+        width: 100%;
+    }
+}

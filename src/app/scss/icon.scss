@@ -1,0 +1,41 @@
+$icon-class: '.ui-icon';
+$iconStandardSize: 48px;
+
+@mixin iconSize($size) {
+    width: $size;
+    height: $size;
+}
+
+#{$icon-class} {
+    &--size-xs {
+        @include iconSize($iconStandardSize * (2/8));
+    }
+    &--size-s {
+        @include iconSize($iconStandardSize * (3/8));
+    }
+    &--size-sm {
+        @include iconSize($iconStandardSize * (4/8));
+    }
+    &--size-md {
+        @include iconSize($iconStandardSize * (6/8));
+    }
+    &--size-normal {
+        @include iconSize($iconStandardSize * (8/8));
+    }
+    &--size-lg {
+        @include iconSize($iconStandardSize * (10/8));
+    }
+    &--size-xl {
+        @include iconSize($iconStandardSize * (12/8));
+    }
+    &--size-xxl {
+        @include iconSize($iconStandardSize * (16/8));
+    }
+
+    &--rotate-90 {
+        @include rotate(90);
+    }
+    &--rotate-45 {
+        @include rotate(45);
+    }
+}
