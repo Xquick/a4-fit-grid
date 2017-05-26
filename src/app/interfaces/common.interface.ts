@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import {Exercise} from "../dto/exercise.dto";
+import {Plan} from "../dto/plan.dto";
 
 export namespace common {
     export interface IExercise {
@@ -15,11 +16,17 @@ export namespace common {
         exerciseList: IExercise[];
     }
 
+    export interface IPlan {
+        id: number;
+        name: string;
+        workoutList: IWorkout[];
+    }
+
     export interface ICurrentWorkout {
         date: moment.Moment;
         name: string;
+        plan: Plan;
         exerciseList: ICurrentWorkoutExercise[];
-        exerciseMap: boolean[];
     }
 
     export interface ICurrentWorkoutExercise {

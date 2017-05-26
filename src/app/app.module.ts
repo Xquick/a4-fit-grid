@@ -12,11 +12,12 @@ import {MainMenuComponent} from "./components/main-menu/main-menu.component";
 import {AppHeaderComponent} from "./components/header/app-header.directive";
 import {
     MdCoreModule, MdButtonModule, MdCheckboxModule, MdCardModule, MdRadioModule, MdSlideToggleModule,
-    MdIconRegistry, MdDatepickerModule, MdIconModule, MdSidenavModule, MdInputModule, MdNativeDateModule
+    MdIconRegistry, MdDatepickerModule, MdIconModule, MdSidenavModule, MdInputModule, MdNativeDateModule, MdToolbar,
+    MdToolbarModule, MdSelectModule, MdSnackBarModule
 } from '@angular/material';
 
 
-import {Ng2DragDropModule} from "ng2-drag-drop";
+import {DndModule} from "ng2-dnd";
 import 'hammerjs';
 
 import {CacheService} from "./services/cache.service";
@@ -26,8 +27,11 @@ import {IAppConfig, FIT_CONFIG} from './app.config';
 import {AutoGrowDirective} from './directives/auto-grow.directive';
 import {GridComponent} from "./components/grid/grid.component";
 import {AppComponent} from "./app.component";
-import {WorkoutComponent} from "./components/workout/workout.component";
+import {NewWorkoutComponent} from "./components/new-workout/new-workout.component";
 import {NewWorkoutService} from "./services/new-workout.service";
+import {FormatDatePipe} from "./pipes/format-date.pipe";
+import {MockDataService} from "./mock/data.service.mock";
+import {SnackBarService} from "./services/snackbar.service";
 
 
 export function HttpLoaderFactory(http: Http) {
@@ -42,7 +46,8 @@ export function HttpLoaderFactory(http: Http) {
         PlansComponent,
         MainMenuComponent,
         AppHeaderComponent,
-        WorkoutComponent
+        NewWorkoutComponent,
+        FormatDatePipe
     ],
     imports: [
         BrowserModule,
@@ -69,11 +74,11 @@ export function HttpLoaderFactory(http: Http) {
         /** Material */
         MdCoreModule, MdDatepickerModule, MdIconModule, MdInputModule, MdCardModule,
         MdCheckboxModule, MdRadioModule, MdButtonModule, MdSlideToggleModule,
-        MdSidenavModule, MdNativeDateModule,
-        FlexLayoutModule,
-        Ng2DragDropModule
+        MdSidenavModule, MdNativeDateModule, MdToolbarModule, MdSelectModule,
+        FlexLayoutModule, MdSnackBarModule,
+        DndModule.forRoot()
     ],
-    providers: [DataService, CacheService, NewWorkoutService, MdIconRegistry,
+    providers: [DataService, CacheService, NewWorkoutService, MdIconRegistry, MockDataService, SnackBarService,
         {provide: IAppConfig, useValue: FIT_CONFIG}],
     bootstrap: [AppComponent]
 })

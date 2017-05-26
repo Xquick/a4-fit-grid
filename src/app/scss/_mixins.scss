@@ -1,9 +1,12 @@
-/*
- *  Copyright (C) 2015 mgm technology partners GmbH, Munich.
- *
- *  See the LICENSE file distributed with this work for additional
- *  information regarding copyright ownership and intellectual property rights.
- */
+
+@mixin placeholder-style {
+    color: white;
+    opacity: 0.5 !important;
+    font-weight: 300;
+    font-size: $font-size;
+}
+
+
 // generic transform
 @mixin transform($transforms) {
     -moz-transform: $transforms;

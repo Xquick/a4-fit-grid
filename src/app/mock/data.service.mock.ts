@@ -10,7 +10,12 @@ import {FIT_CONFIG} from "../app.config";
 import IWorkout = common.IWorkout;
 import ICurrentWorkout = common.ICurrentWorkout;
 import IExerciseType = common.IExerciseType;
-
+import {DataService} from "../services/data.service";
+import {
+    EXERCISE_JSON,
+    USER_EXERCISE_HISTORY_JSON,
+    USER_PLANS_JSON
+} from './data/data.mock';
 
 export interface IDataService {
     loadExerciseList(): Observable<Exercise[]>;
@@ -20,27 +25,18 @@ export interface IDataService {
     persistWorkout(workout: ICurrentWorkout): void;
 }
 
-export class DataService implements IDataService {
-    public exerciseListByTypes: IExerciseType[];
-    public exerciseList: Exercise[];
-    public exercise: Exercise;
+export class MockDataService extends DataService {
 
-    constructor(@Inject(Http) protected http: Http) {
-        this.exerciseListByTypes = [];
+    constructor(@Inject(Http) http: Http) {
+        super(http);
     }
 
     loadExerciseList(): Observable<response.IExercise[]> {
-        return this.http.get(FIT_CONFIG.api.url + 'exercises/')
-            .map((response: any) => {
-                return <Exercise[]>response.json().exerciseList;
-            });
+        return Observable.of(EXERCISE_JSON);
     }
 
     loadExerciseHistory(): Observable<response.IWorkoutHistory[]> {
-        return this.http.get(FIT_CONFIG.api.url + 'users/' + 1 + '/history')
-            .map((response: any) => {
-                return response.json();
-            });
+        return Observable.of(USER_EXERCISE_HISTORY_JSON)
     }
 
     getExerciseDetail(exerciseId: number): Exercise {
@@ -48,10 +44,7 @@ export class DataService implements IDataService {
     }
 
     loadUserPlanList(): Observable<response.IPlan[]> {
-        return this.http.get(FIT_CONFIG.api.url + 'users/' + 1 + '/plans', {})
-            .map((response: response.IWorkoutList) => {
-                return <response.IPlan[]>response.json();
-            });
+        return Observable.of(USER_PLANS_JSON)
     }
 
     persistWorkout(workout: ICurrentWorkout): Observable<boolean> {

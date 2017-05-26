@@ -4,56 +4,51 @@ import * as moment from 'moment';
 import * as _ from 'underscore';
 
 import {Exercise} from "../dto/exercise.dto";
-import {Workout} from "../dto/workout.dto";
 import {DataService} from "./data.service";
-import {Subscription} from "rxjs";
-import {Inject, OnInit} from "@angular/core";
+import {Observable, ReplaySubject, Subject} from "rxjs";
+import {Inject} from "@angular/core";
 
 import {FIT_CONFIG} from "../app.config";
-
+import ICurrentWorkout = common.ICurrentWorkout;
+import ICurrentWorkoutExercise = common.ICurrentWorkoutExercise;
+import IExerciseSchedule = common.IExerciseSchedule;
+import IExerciseType = common.IExerciseType;
+import {Plan} from "../dto/plan.dto";
 
 export interface ICacheService {
-    exerciseListByTypes: common.IExerciseType[];
-    exerciseList: Exercise[];
     exercise: Exercise;
-    userWorkouts: Workout[];
-    currentWorkout: common.ICurrentWorkout;
-
-    cacheUserWorkouts(): void;
+    sortExercisesByTypes(exercises: Exercise[]): IExerciseType[];
+    cacheUserPlans(): void;
     cacheExerciseList(): void;
-    updateCacheExerciseHistory(workout: common.ICurrentWorkout): void;
+    updateCacheExerciseHistory(workout: ICurrentWorkout): void;
 }
 
-export class CacheService implements ICacheService, OnInit {
-    exerciseListByTypes: common.IExerciseType[];
-    exerciseList: Exercise[];
+export class CacheService implements ICacheService {
+    private _exerciseListByTypes: ReplaySubject<IExerciseType[]>;
+    private _exerciseList: ReplaySubject<Exercise[]>;
+    private _userPlans: ReplaySubject<Plan[]>;
+
     exercise: Exercise;
-    private _userWorkouts: Workout[];
-    private _currentWorkout: common.ICurrentWorkout;
 
     constructor(@Inject(DataService) private dataService: DataService) {
-        this._userWorkouts = [];
-        this.exerciseList = [];
-        this.initCurrentWorkout();
-    }
-
-    ngOnInit(): void {
+        this._userPlans = new ReplaySubject();
+        this._exerciseList = new ReplaySubject();
+        this._exerciseListByTypes = new ReplaySubject();
     }
 
     cacheExerciseList(): void {
-        this.dataService.loadExerciseList().subscribe(exercises => {
-            _.each(exercises, (exercise: response.IExercise) => {
-                this.exerciseList.push(new Exercise(exercise));
-            });
+        let returnExerciseList: Exercise[] = [];
 
-            this.cacheExerciseHistory();
-        });
-    }
+        Observable.zip(
+            this.dataService.loadExerciseList(),
+            this.dataService.loadExerciseHistory())
 
-    protected cacheExerciseHistory(): Subscription {
-        return this.dataService.loadExerciseHistory()
-            .subscribe((historyList) => {
-                _.each(this.exerciseList, (exercise: Exercise) => {
+            .subscribe(([exercises, historyList]) => {
+                _.each(exercises, (exercise: response.IExercise) => {
+                    returnExerciseList.push(new Exercise(exercise));
+                });
+
+                _.each(returnExerciseList, (exercise: Exercise) => {
                     _.each(historyList, (workoutHistory: response.IWorkoutHistory) => {
                         _.each(workoutHistory.schedule, (workoutSchedule: response.IWorkoutSchedule) => {
                             let scheduledExercise: response.IExerciseWithSchedule = <response.IExerciseWithSchedule>_.find(workoutSchedule.exerciseList, {name: exercise.name});
@@ -62,58 +57,48 @@ export class CacheService implements ICacheService, OnInit {
                                 if (exercise.schedule === undefined) {
                                     exercise.schedule = [];
                                 }
-                                exercise.schedule.push(<common.IExerciseSchedule>{
-                                    date: moment(workoutSchedule.date, FIT_CONFIG.date.shortFormat),
+                                exercise.schedule.push(<IExerciseSchedule>{
+                                    date: moment(workoutSchedule.date, FIT_CONFIG.date.longFormat),
                                     setList: scheduledExercise.setList
                                 });
                             }
                         });
                     });
                 });
-
-                this.exerciseListByTypes = [];
-                this.exerciseListByTypes = this.sortExercisesByTypes(this.exerciseList);
-                console.log(this.exerciseListByTypes);
-                return true;
+                this.setExerciseList(returnExerciseList);
             });
     }
 
-    public updateCacheExerciseHistory(workout: common.ICurrentWorkout): void {
-        _.each(workout.exerciseList, (exercise: common.ICurrentWorkoutExercise) => {
-            let cachedExercise: Exercise = <Exercise>_.find(this.exerciseList, {id: exercise.id});
-            if (!cachedExercise.hasOwnProperty('schedule')) {
-                cachedExercise.schedule = [];
-            }
+    public updateCacheExerciseHistory(workout: ICurrentWorkout): void {
+        console.log(workout);
+        _.each(workout.exerciseList, (exercise: ICurrentWorkoutExercise) => {
 
-            let schedule: common.IExerciseSchedule = <common.IExerciseSchedule>{
-                date: workout.date,
-                setList: []
-            };
+            this.getExerciseById(exercise.id, (cachedExercise) => {
+                if (!cachedExercise.hasOwnProperty('schedule')) {
+                    cachedExercise.schedule = [];
+                }
 
-            cachedExercise.schedule.push(schedule);
+                let schedule: IExerciseSchedule = <IExerciseSchedule>{
+                    date: workout.date,
+                    setList: []
+                };
 
-            _.extend(_.findWhere(this.exerciseList, {id: exercise.id}), cachedExercise);
-            this.exerciseListByTypes = this.sortExercisesByTypes(this.exerciseList);
+                cachedExercise.schedule.push(schedule);
+
+                _.extend(_.findWhere(this.exerciseList, {id: exercise.id}), cachedExercise);
+            });
+
         });
     }
 
-
-    public cacheUserWorkouts(): void {
-        this.dataService.loadUserWorkoutList().subscribe((workoutList: response.IWorkout[]): void => {
-            if (_.isEmpty(this._userWorkouts)) {
-                _.each(workoutList, (workout: response.IWorkout) => {
-                    this._userWorkouts.push(new Workout(workout));
-                });
-            }
+    public cacheUserPlans(): void {
+        let returnPlanList: Plan[] = [];
+        this.dataService.loadUserPlanList().subscribe((planList: response.IPlan[]): void => {
+            _.each(planList, (plan: response.IPlan) => {
+                returnPlanList.push(new Plan(plan));
+            });
+            this.setUserPlans(returnPlanList);
         });
-    }
-
-
-    public cacheCurrentWorkout(workoutDate) {
-        this._currentWorkout.date = moment.unix(workoutDate.getTime() / 1000);
-        this.dataService.persistWorkout(this._currentWorkout);
-        this.updateCacheExerciseHistory(this._currentWorkout);
-        this.initCurrentWorkout();
     }
 
     /*
@@ -123,9 +108,9 @@ export class CacheService implements ICacheService, OnInit {
      * @param exercises: Exercise[]
      * @returns {IExerciseType[]} resulting into structure e.g. {'chest': {[Exercise1, Exercise5]}, 'back': {[...]}}
      */
-    private sortExercisesByTypes(exercises: Exercise[]): common.IExerciseType[] {
+    public sortExercisesByTypes(exercises: Exercise[]): IExerciseType[] {
         let exerciseArr: {[key: string]: Exercise[]} = {};
-        let exercisesByType: common.IExerciseType[] = [];
+        let exercisesByType: IExerciseType[] = [];
 
         _.each(exercises, exercise => {
             if (typeof exerciseArr[exercise.type] === 'undefined') {
@@ -141,7 +126,7 @@ export class CacheService implements ICacheService, OnInit {
         });
 
         for (let key in exerciseArr) {
-            let exerciseType: common.IExerciseType = <common.IExerciseType>{};
+            let exerciseType: IExerciseType = <IExerciseType>{};
 
             exerciseType.name = key;
             exerciseType.exerciseList = exerciseArr[key];
@@ -152,28 +137,34 @@ export class CacheService implements ICacheService, OnInit {
         return exercisesByType;
     }
 
-
-    private initCurrentWorkout() {
-        this._currentWorkout = <common.ICurrentWorkout>{};
-        this._currentWorkout.exerciseList = [];
-        this._currentWorkout.exerciseMap = [];
+    getExerciseById(exerciseId: number, callback: (response: Exercise) => void) {
+        return this.exerciseList.map((exerciseList) => {
+            let exercise = _.find(exerciseList, {id: exerciseId});
+            callback(exercise);
+        }).subscribe();
     }
 
-
-    get currentWorkout(): common.ICurrentWorkout {
-        return this._currentWorkout;
+    get exerciseListByTypes(): Observable<IExerciseType[]> {
+        return this._exerciseListByTypes;
     }
 
-    set currentWorkout(value: common.ICurrentWorkout) {
-        this._currentWorkout = value;
+    setExerciseListByTypes(value: IExerciseType[]) {
+        this._exerciseListByTypes.next(value);
     }
 
-    get userWorkouts(): Workout[] {
-        return this._userWorkouts;
+    get exerciseList(): ReplaySubject<Exercise[]> {
+        return this._exerciseList;
     }
 
-    set userWorkouts(value: Workout[]) {
-        this._userWorkouts = value;
+    setExerciseList(value: Exercise[]) {
+        this._exerciseList.next(value);
     }
 
+    get userPlans(): ReplaySubject<Plan[]> {
+        return this._userPlans;
+    }
+
+    setUserPlans(value: Plan[]) {
+        this._userPlans.next(value);
+    }
 }

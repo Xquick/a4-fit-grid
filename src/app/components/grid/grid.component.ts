@@ -1,5 +1,4 @@
-import {Component, Inject, OnInit, Output, EventEmitter} from "@angular/core";
-import {MdDialog} from "@angular/material";
+import {Component, OnInit} from "@angular/core";
 
 import * as moment from 'moment';
 import {Exercise} from "../../dto/exercise.dto";
@@ -8,7 +7,11 @@ import {FIT_CONFIG} from "../../app.config";
 import * as _ from 'underscore';
 import {CacheService} from "../../services/cache.service";
 import ICurrentWorkout = common.ICurrentWorkout;
-import {NewWorkoutService} from "../../services/new-workout.service";
+import {NewWorkoutService, IExerciseCheckboxMap} from "../../services/new-workout.service";
+
+import IExerciseType = common.IExerciseType;
+import IExerciseSchedule = common.IExerciseSchedule;
+import ICalendarDays = common.ICalendarDays;
 
 @Component({
     selector: 'grid',
@@ -17,51 +20,48 @@ import {NewWorkoutService} from "../../services/new-workout.service";
 })
 
 export class GridComponent implements OnInit {
+    exerciseList: Exercise[];
+    exerciseListByType: IExerciseType[];
 
-    @Output() exerciseToggled = new EventEmitter();
-    currentWorkout: ICurrentWorkout;
-    public calendarDays: common.ICalendarDays[] = [];
+    public calendarDays: ICalendarDays[] = [];
 
-    constructor(private mdDialog: MdDialog,
-                private cacheService: CacheService,
+    constructor(private cacheService: CacheService,
                 private newWorkoutService: NewWorkoutService) {
-        this.initHistoryDates();
     }
 
+
     ngOnInit(): void {
-        this.currentWorkout = this.cacheService.currentWorkout;
+        this.cacheService.exerciseList.subscribe((exerciseList: Exercise[]) => {
+            this.exerciseList = exerciseList;
+            this.exerciseListByType = this.cacheService.sortExercisesByTypes(exerciseList);
+            this.initHistoryDates();
+        });
     }
 
     public toggleExercise(exercise: Exercise) {
         this.newWorkoutService.toggleExercise(exercise);
     }
 
-    public didExerciseOccurreOnThisDay(exercise: Exercise, day: common.ICalendarDays): boolean {
-        let occurred = false;
-        if (exercise.hasOwnProperty('schedule')) {
-            _.each(exercise.schedule, (scheduleItem: common.IExerciseSchedule) => {
-                if (moment(day.date.format(FIT_CONFIG.date.mediumFormat)).isSame(moment(scheduleItem.date.format(FIT_CONFIG.date.mediumFormat)))) {
-                    occurred = true;
-                }
-            });
+    get checkboxMap(): IExerciseCheckboxMap {
+        return this.newWorkoutService.checkboxMap;
+    }
 
-            return occurred;
-        } else {
-            return false;
-        }
+    get currentWorkout(): ICurrentWorkout {
+        return this.newWorkoutService.currentWorkout;
     }
 
     private initHistoryDates() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < FIT_CONFIG.numberOfHistoryDays; i++) {
             let date: moment.Moment = moment();
 
             date = date.subtract(i, 'days');
 
-            let calendarDay: common.ICalendarDays = <common.ICalendarDays>{};
+            let calendarDay: ICalendarDays = <ICalendarDays>{};
             calendarDay.date = date;
             calendarDay.weekday = date.day();
             calendarDay.abbreviation = "";
             this.calendarDays.push(calendarDay);
         }
     }
+
 }

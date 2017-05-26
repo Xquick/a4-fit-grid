@@ -1,0 +1,34 @@
+@import '../../../styles';
+
+$superset-padding: 20px;
+
+.wrapper {
+    min-width: 300px;
+
+    ul {
+        padding: 10px 0;
+        margin: 0;
+        background: white;
+
+        li {
+            padding: 5px;
+            border-bottom: 1px solid $color-border;
+        }
+    }
+
+    .superset + .superset {
+        padding-left: $superset-padding;
+    }
+
+    .superset + .superset + .superset {
+        padding-left: 2*$superset-padding;
+    }
+
+    .superset + .superset + .superset + .superset {
+        padding-left: 3*$superset-padding;
+    }
+
+    .mat-toolbar {
+        padding: 0;
+    }
+}

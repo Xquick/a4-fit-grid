@@ -9,3 +9,7 @@ $content-class: '.ui-content';
 .mat-sidenav-backdrop.mat-sidenav-shown{
     display: none;
 }
+
+.mat-sidenav-container {
+    height: 100%;
+}

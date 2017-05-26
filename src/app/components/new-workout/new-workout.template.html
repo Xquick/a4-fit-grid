@@ -1,0 +1,106 @@
+<div class="wrapper">
+    <md-toolbar color="primary" fxLayout="row">
+        <!--<div fxLayout="row"-->
+        <!--fxFlex="100"-->
+        <!--fxFlexAlign="stretch">-->
+
+        <!--<div fxFlex="80"></div>-->
+        <!--<div fxFlex="20"-->
+        <!--fxLayoutAlign="center center"-->
+        <!--fxLayout="column">-->
+        <!--<button md-button-->
+        <!--(click)="toggleWorkoutSideNav()">-->
+        <!--<i class="material-icons">close</i>-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <md-toolbar-row fxFlexAlign="stretch">
+            <md-select fxFlex="80" [placeholder]="'new-workout.plan'|translate" [(ngModel)]="selectedPlan">
+                <md-option *ngFor="let plan of userPlans;"
+                           fxFlex="80"
+                           [value]="plan"
+                           fxLayout="column">{{plan.name}}
+                </md-option>
+            </md-select>
+            <button md-button
+                    fxFlex="20"
+                    fxLayoutAlign="center center"
+                    (click)="toggleNewPlanDialog()">
+                <i class="material-icons">playlist_add</i>
+            </button>
+        </md-toolbar-row>
+
+        <md-toolbar-row fxFlexAlign="stretch">
+            <input [(ngModel)]="currentWorkout.name"
+                   color="primary"
+                   [placeholder]="'new-workout.header'|translate"
+                   fxFlex="100"
+                   fxLayout="column"/>
+
+        </md-toolbar-row>
+
+        <md-toolbar-row fxFlexAlign="stretch">
+            <input mdInput
+                   [(ngModel)]="selectedDate"
+                   [mdDatepicker]="picker"
+                   (focus)=picker.open()
+                   color="primary"
+                   [placeholder]="'new-workout.datepicker.placeholder'|translate">
+
+            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-toolbar-row>
+    </md-toolbar>
+
+    <md-datepicker fxLayout="row" #picker md-select-on-focus></md-datepicker>
+
+    <div fxLayout="row">
+        <ul dnd-sortable-container
+            fxFill
+            [sortableData]="currentWorkout.exerciseList">
+            <li class="md-table-content-row"
+                *ngFor="let exercise of currentWorkout.exerciseList; let i = index;"
+                [ngClass]="{superset:exercise.isSuperset}"
+                dnd-sortable [sortableIndex]="i">
+
+                <div class="height-100" fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="handle"
+                         fxFlex="10"
+                         fxLayout="column"
+                         *ngIf="exercise.isSuperset">
+                        <i class="material-icons">subdirectory_arrow_right</i>
+                    </div>
+                    <div class="handle" fxFlex="10" fxLayout="column" dnd-sortable-handle>
+                        <i class="material-icons">drag_handle</i>
+                    </div>
+                    <div fxFlex="70" fxLayout="column"><span class="first-letter--upper">{{exercise.name}}</span>
+                    </div>
+                    <div class="ui-icons" fxFlex="20" fxLayout="column">
+                <span fxLayout="row">
+                            <button md-button
+                                    class="ui-button ui-button--icon"
+                                    (click)="toggleExerciseSuperset(exercise)"
+                                    fxLayout="column">
+                                <i class="material-icons">link</i>
+                            </button>
+                            <button md-button
+                                    class="ui-button ui-button--icon"
+                                    fxLayout="column"
+                                    (click)="toggleExercise(exercise)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                </span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button md-raised-button
+                color="accent"
+                *ngIf="currentWorkout.exerciseList.length > 0"
+                (click)="saveWorkout()"
+                aria-label="">{{'new-workout.save'|translate}}
+        </button>
+    </div>
+</div>

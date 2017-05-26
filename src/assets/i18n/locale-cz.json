@@ -7,7 +7,11 @@
   "menu.plans": "Plány",
   "new-workout.open": "Otevřít",
   "new-workout.close": "Zavřít",
-  "new-workout.header": "Název plánu",
-  "new-workout.datepicker.placeholder": "Datum plánu",
-  "new-workout.save": "Uložit plán"
+  "new-workout.header": "Název workoutu",
+  "new-workout.datepicker.placeholder": "Datum workoutu",
+  "new-workout.save": "Uložit workout",
+  "new-workout.plan": "Plán",
+  "new-workout.workout-created": "Nový workout byl vytvořen",
+  "new-workout.plan-not-selected": "Nebyl vybrán žádný plán",
+  "snackbar.confirm": "Rozumím"
 }

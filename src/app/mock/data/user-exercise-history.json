@@ -1,0 +1,254 @@
+[
+  {
+    "workout_id": 1,
+    "workout_name": "my first workout",
+    "schedule": [
+      {
+        "date": "22.07.2017",
+        "exerciseList": [
+          {
+            "id": 16,
+            "name": "deadlift",
+            "type": "back",
+            "setList": [
+              {
+                "id": 1,
+                "setNumber": 1,
+                "repCount": 10,
+                "weight": 100,
+                "workoutScheduleExerciseId": 1
+              },
+              {
+                "id": 2,
+                "setNumber": 2,
+                "repCount": 8,
+                "weight": 80,
+                "workoutScheduleExerciseId": 1
+              }
+            ]
+          },
+          {
+            "id": 46,
+            "name": "chinups",
+            "type": "biceps",
+            "setList": [
+              {
+                "id": 3,
+                "setNumber": 1,
+                "repCount": 10,
+                "weight": 100,
+                "workoutScheduleExerciseId": 2
+              },
+              {
+                "id": 4,
+                "setNumber": 2,
+                "repCount": 8,
+                "weight": 80,
+                "workoutScheduleExerciseId": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 2,
+    "workout_name": "A",
+    "schedule": []
+  },
+  {
+    "workout_id": 3,
+    "workout_name": "QWQ",
+    "schedule": [
+      {
+        "date": "01.05.2017",
+        "exerciseList": [
+          {
+            "id": 1,
+            "name": "flat benchpress",
+            "type": "chest",
+            "setList": []
+          },
+          {
+            "id": 2,
+            "name": "flat dumbbell press",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 4,
+    "workout_name": "EE",
+    "schedule": [
+      {
+        "date": "23.05.2017",
+        "exerciseList": [
+          {
+            "id": 1,
+            "name": "flat benchpress",
+            "type": "chest",
+            "setList": []
+          },
+          {
+            "id": 2,
+            "name": "flat dumbbell press",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 5,
+    "workout_name": "asdasd",
+    "schedule": [
+      {
+        "date": "23.05.2017",
+        "exerciseList": [
+          {
+            "id": 8,
+            "name": "incline machine press",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 6,
+    "workout_name": "TEST",
+    "schedule": [
+      {
+        "date": "21.05.2017",
+        "exerciseList": [
+          {
+            "id": 6,
+            "name": "incline dumbbells",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 7,
+    "workout_name": "FFF",
+    "schedule": [
+      {
+        "date": "19.05.2017",
+        "exerciseList": [
+          {
+            "id": 3,
+            "name": "flat flyes",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 8,
+    "workout_name": "FDASDAS",
+    "schedule": [
+      {
+        "date": "18.05.2017",
+        "exerciseList": [
+          {
+            "id": 4,
+            "name": "flat machine press",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 9,
+    "workout_name": "!@#123",
+    "schedule": [
+      {
+        "date": "24.05.2017",
+        "exerciseList": [
+          {
+            "id": 9,
+            "name": "peckdeck",
+            "type": "chest",
+            "setList": []
+          },
+          {
+            "id": 10,
+            "name": "cable flyes",
+            "type": "chest",
+            "setList": []
+          },
+          {
+            "id": 11,
+            "name": "pushups",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 10,
+    "workout_name": null,
+    "schedule": [
+      {
+        "date": "22.05.2017",
+        "exerciseList": [
+          {
+            "id": 5,
+            "name": "incline benchpress",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 11,
+    "workout_name": null,
+    "schedule": [
+      {
+        "date": "23.05.2017",
+        "exerciseList": [
+          {
+            "id": 13,
+            "name": "pullover",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "workout_id": 12,
+    "workout_name": null,
+    "schedule": [
+      {
+        "date": "24.05.2017",
+        "exerciseList": [
+          {
+            "id": 1,
+            "name": "flat benchpress",
+            "type": "chest",
+            "setList": []
+          }
+        ]
+      }
+    ]
+  }
+]

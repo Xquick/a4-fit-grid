@@ -1,0 +1,299 @@
+{
+  "exerciseList": [
+    {
+      "id": 1,
+      "name": "flat benchpress",
+      "type": "chest"
+    },
+    {
+      "id": 2,
+      "name": "flat dumbbell press",
+      "type": "chest"
+    },
+    {
+      "id": 3,
+      "name": "flat flyes",
+      "type": "chest"
+    },
+    {
+      "id": 4,
+      "name": "flat machine press",
+      "type": "chest"
+    },
+    {
+      "id": 5,
+      "name": "incline benchpress",
+      "type": "chest"
+    },
+    {
+      "id": 6,
+      "name": "incline dumbbells",
+      "type": "chest"
+    },
+    {
+      "id": 7,
+      "name": "incline flyes",
+      "type": "chest"
+    },
+    {
+      "id": 8,
+      "name": "incline machine press",
+      "type": "chest"
+    },
+    {
+      "id": 9,
+      "name": "peckdeck",
+      "type": "chest"
+    },
+    {
+      "id": 10,
+      "name": "cable flyes",
+      "type": "chest"
+    },
+    {
+      "id": 11,
+      "name": "pushups",
+      "type": "chest"
+    },
+    {
+      "id": 12,
+      "name": "cavalier crossover",
+      "type": "chest"
+    },
+    {
+      "id": 13,
+      "name": "pullover",
+      "type": "chest"
+    },
+    {
+      "id": 14,
+      "name": "dips",
+      "type": "chest"
+    },
+    {
+      "id": 15,
+      "name": "pullups",
+      "type": "back"
+    },
+    {
+      "id": 16,
+      "name": "deadlift",
+      "type": "back"
+    },
+    {
+      "id": 17,
+      "name": "barbell row",
+      "type": "back"
+    },
+    {
+      "id": 18,
+      "name": "dumbbell row - single arm",
+      "type": "back"
+    },
+    {
+      "id": 19,
+      "name": "dumbbell row - both arms",
+      "type": "back"
+    },
+    {
+      "id": 20,
+      "name": "standing t-bar row",
+      "type": "back"
+    },
+    {
+      "id": 21,
+      "name": "seated cabel row - wide grip",
+      "type": "back"
+    },
+    {
+      "id": 22,
+      "name": "seated cabel row - close grip",
+      "type": "back"
+    },
+    {
+      "id": 23,
+      "name": "cable pulldown - wide grip",
+      "type": "back"
+    },
+    {
+      "id": 24,
+      "name": "cable pulldown - close grip",
+      "type": "back"
+    },
+    {
+      "id": 25,
+      "name": "standing lat pushdown",
+      "type": "back"
+    },
+    {
+      "id": 26,
+      "name": "cable crossover pulldown - romboids",
+      "type": "back"
+    },
+    {
+      "id": 27,
+      "name": "reverse peckdeck",
+      "type": "back"
+    },
+    {
+      "id": 28,
+      "name": "lateral side raise",
+      "type": "shoulders"
+    },
+    {
+      "id": 29,
+      "name": "front dumbell raise",
+      "type": "shoulders"
+    },
+    {
+      "id": 30,
+      "name": "barbell seated shoulder press",
+      "type": "shoulders"
+    },
+    {
+      "id": 31,
+      "name": "military press",
+      "type": "shoulders"
+    },
+    {
+      "id": 32,
+      "name": "push-press",
+      "type": "shoulders"
+    },
+    {
+      "id": 33,
+      "name": "behind neck seated shoulder press",
+      "type": "shoulders"
+    },
+    {
+      "id": 34,
+      "name": "facepull",
+      "type": "shoulders"
+    },
+    {
+      "id": 35,
+      "name": "machine shoulder press",
+      "type": "shoulders"
+    },
+    {
+      "id": 36,
+      "name": "seated rear delt raise 45degree",
+      "type": "shoulders"
+    },
+    {
+      "id": 37,
+      "name": "reverse peckdeck",
+      "type": "shoulders"
+    },
+    {
+      "id": 38,
+      "name": "inclide bench dumbbell- laying on side rear delt",
+      "type": "shoulders"
+    },
+    {
+      "id": 39,
+      "name": "cable crossover",
+      "type": "shoulders"
+    },
+    {
+      "id": 40,
+      "name": "dumbbell curls",
+      "type": "biceps"
+    },
+    {
+      "id": 41,
+      "name": "barbell curls",
+      "type": "biceps"
+    },
+    {
+      "id": 42,
+      "name": "barbell 21",
+      "type": "biceps"
+    },
+    {
+      "id": 43,
+      "name": "hammer curls",
+      "type": "biceps"
+    },
+    {
+      "id": 44,
+      "name": "ez standing curls",
+      "type": "biceps"
+    },
+    {
+      "id": 45,
+      "name": "nautilus",
+      "type": "biceps"
+    },
+    {
+      "id": 46,
+      "name": "chinups",
+      "type": "biceps"
+    },
+    {
+      "id": 47,
+      "name": "incline bench dumbbell curls",
+      "type": "biceps"
+    },
+    {
+      "id": 48,
+      "name": "incline bench dumbbell curls with twist - lying on belly",
+      "type": "biceps"
+    },
+    {
+      "id": 49,
+      "name": "cable crossover curls",
+      "type": "biceps"
+    },
+    {
+      "id": 50,
+      "name": "cable curls with straight bar",
+      "type": "biceps"
+    },
+    {
+      "id": 51,
+      "name": "reverse grip barbell curls",
+      "type": "biceps"
+    },
+    {
+      "id": 52,
+      "name": "cable pulldown - clasic grip",
+      "type": "triceps"
+    },
+    {
+      "id": 53,
+      "name": "cable pulldown - neutral grip",
+      "type": "triceps"
+    },
+    {
+      "id": 54,
+      "name": "cable pulldown - reverse grip",
+      "type": "triceps"
+    },
+    {
+      "id": 55,
+      "name": "dumbbell kickback",
+      "type": "triceps"
+    },
+    {
+      "id": 56,
+      "name": "seated overhead dumbell extension - double hand",
+      "type": "triceps"
+    },
+    {
+      "id": 57,
+      "name": "seated overhead dumbell extension - single hand",
+      "type": "triceps"
+    },
+    {
+      "id": 58,
+      "name": "close grip benchpress",
+      "type": "triceps"
+    },
+    {
+      "id": 59,
+      "name": "dips",
+      "type": "triceps"
+    }
+  ]
+}

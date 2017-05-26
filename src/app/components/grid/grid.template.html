@@ -3,7 +3,7 @@
     <div class="exercise-type-wrapper"
          fxLayout="row"
          fxFlex="100"
-         *ngFor="let exerciseType of cacheService.exerciseListByTypes; let $index = index">
+         *ngFor="let exerciseType of exerciseListByType; let $index = index">
 
         <div fxLayout="column" fxFlex="100">
             <md-card>
@@ -14,9 +14,10 @@
                         <tr md-row="md-row">
                             <th md-column="md-column"></th>
                             <th md-column="md-column"></th>
-                            <!--<th *ngFor="let day of calendarDays"-->
-                                <!--md-column="md-column">{{day.date | formatDate | translate}}-->
-                            <!--</th>-->
+                            <th class="day" *ngFor="let day of calendarDays"
+                                md-column="md-column">
+                                <span class="rotate-45">{{day.date | formatDate | translate}}</span>
+                            </th>
                         </tr>
                         </thead>
                         <tbody md-body="md-body">
@@ -26,18 +27,23 @@
                             md-row="md-row">
 
                             <td md-cell="md-cell">
-                                <md-checkbox [checked]="currentWorkout.exerciseMap[exercise.id]"
+                                <md-checkbox [(checked)]="checkboxMap.current[exercise.id]"
                                              aria-label="checkbox"
-                                             (click)="toggleExercise(exercise)"></md-checkbox>
+                                             color="primary"
+                                             (change)="toggleExercise(exercise)"></md-checkbox>
                             </td>
-                            <td class="exercise" md-cell="md-cell" (click)="ctrl.openExerciseDetailDialog($event,1)">
+                            <td class="exercise padding--left" md-cell="md-cell">
                                 <span class="first-letter--upper">{{exercise.name}}</span></td>
 
                             <td class="day"
-                                *ngFor="let day of calendarDays"
+                                *ngFor="let day of calendarDays; let daysAgo = index;"
+                                [ngClass]="{active: checkboxMap.history[exercise.id][daysAgo]}"
                                 md-cell="md-cell">
-                                <md-checkbox [checked]="didExerciseOccurreOnThisDay(exercise, day)"
-                                             aria-label="checkbox" disabled="true"></md-checkbox>
+                                <div fxLayoutAlign="center center">
+                                    <i *ngIf="checkboxMap.history[exercise.id][daysAgo];else elseBlock;"
+                                       class="material-icons">check</i>
+                                    <ng-template #elseBlock><i class="material-icons"></i></ng-template>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

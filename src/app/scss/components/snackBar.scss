@@ -1,0 +1,15 @@
+
+.cdk-overlay-pane .success {
+    background-color: mat-color($accent, 200);
+
+    .mat-simple-snackbar {
+        color: black;
+    }
+}
+.cdk-overlay-pane .error {
+    background-color: $color-error;
+
+    .mat-simple-snackbar {
+        color: black;
+    }
+}

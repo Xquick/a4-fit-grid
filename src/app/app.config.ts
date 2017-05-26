@@ -1,6 +1,11 @@
 import {InjectionToken} from "@angular/core";
 
 export interface IAppConfig {
+    snackBar: {
+        duration: number;
+        position: string;
+    }
+    mockApi: string;
     api: {
         url: string
     };
@@ -9,9 +14,11 @@ export interface IAppConfig {
         mediumFormat: string;
         longFormat: string;
     };
+    numberOfHistoryDays: number;
 }
 
 export const FIT_CONFIG: IAppConfig = {
+    mockApi: '/assets/data/',
     api: {
         url: 'http://fit-grid-api.localhost/api/'
     },
@@ -19,6 +26,11 @@ export const FIT_CONFIG: IAppConfig = {
         shortFormat: 'D.M',
         mediumFormat: 'D.M.YY',
         longFormat: 'D.M.YYYY'
+    },
+    numberOfHistoryDays: 8,
+    snackBar: {
+        duration: 5000,
+        position: ''
     }
 };
 

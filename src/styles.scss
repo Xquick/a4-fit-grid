@@ -1,5 +1,5 @@
 @import '../node_modules/@angular/material/theming';
-@import "../node_modules/ng2-flex-layout/dist/ng2-flex-layout.css";
+
 @include mat-core();
 $primary: mat-palette($mat-blue-grey, 500);
 $accent:  mat-palette($mat-amber, A100);
@@ -14,15 +14,16 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 
 @import 'app/scss/content';
-@import 'app/scss/component';
 @import 'app/scss/button';
 @import 'app/scss/general';
 @import 'app/scss/list';
+@import 'app/scss/input';
 @import 'app/scss/icon';
 @import 'app/scss/menu';
 @import 'app/scss/components/filter';
 @import 'app/scss/components/workout';
+@import 'app/scss/components/snackBar';
 @import 'app/scss/dialog/md-dialog';
-@import 'app/scss/grid';
 @import 'app/scss/table';
 @import 'app/scss/dragDrop';
+@import 'app/scss/layout';

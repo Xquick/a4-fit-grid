@@ -36,6 +36,12 @@ export namespace response {
         exerciseList: Exercise[];
     }
 
+    export interface IPlan {
+        id: number;
+        name: string;
+        workoutList: IWorkout[];
+    }
+
     export interface IWorkoutSchedule {
         date: string;
         exerciseList: IExerciseWithSchedule[];
@@ -46,5 +52,4 @@ export namespace response {
         workout_name: string;
         schedule: IWorkoutSchedule[]
     }
-
 }

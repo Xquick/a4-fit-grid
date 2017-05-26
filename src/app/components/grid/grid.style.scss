@@ -1,3 +1,30 @@
-md-card{
-    margin-bottom: 20px;
+@import '../../../styles';
+
+
+th {
+    padding-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td.day,
+th.day {
+    @include fixed-width(35px);
+    height: 35px;
+}
+
+td:first-child,
+td:nth-child(2){
+    border-width: 1px 0;
+}
+
+td {
+    border: 1px solid $color-border;
+}
+
+td.day.active {
+    background: $color-accent;
+    color: white;
 }

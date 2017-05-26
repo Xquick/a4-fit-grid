@@ -1,6 +1,4 @@
 //Dimensions
-$map-width: 700px;
-$message-list-width: 300px;
 $radius: 3px;
 $menu-width: 60px;
 
@@ -14,11 +12,13 @@ $color-error: #FF6363;
 $color-success: #66D14F;
 $color-like: #E96B6B;
 $color-button: #F7F7F7;
-$color-border: #CCCCCC;
 $color-shadow: #B8B8B8;
 $color-white: #FFFFFF;
 
+$color-border: mat-color($primary, 50);
+$color-accent: mat-color($accent, 400);
 $button-height: 40px;
 
 $font-size: 14px;
 
+$padding-input: 10px;

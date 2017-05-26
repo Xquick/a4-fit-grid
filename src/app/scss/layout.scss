@@ -1,0 +1,43 @@
+md-sidenav .mat-toolbar {
+    &-row {
+        height: 45px;
+        &:not(:first-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mat-select-trigger {
+            height: 100%;
+        }
+        .mat-select-underline {
+            background: none;
+        }
+
+        .mat-select {
+            padding: $padding-input;
+            color: white;
+            @include placeholder {
+                color: white;
+            }
+        }
+
+        input.mat-input-element {
+            width: 80%;
+        }
+
+        .mat-datepicker-toggle {
+            color: white;
+        }
+    }
+
+    &-layout {
+        width: 100%;
+    }
+}
+
+md-card {
+    margin-bottom: 20px;
+}
+
+.exercise {
+    width: 180px;
+}

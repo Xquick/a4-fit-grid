@@ -3,3 +3,35 @@ $input-class: 'ui-input';
 #{$input-class} {
     margin: 0;
 }
+
+.mat-select {
+    &-placeholder,
+    &-arrow {
+        @include placeholder-style;
+    }
+    &-value-text {
+        color: white;
+        font-size: $font-size;
+    }
+}
+.mat-option{
+    max-width: none !important;
+}
+.mat-checkbox:not(.mat-checkbox-checked) {
+    opacity: 0.2;
+}
+
+input {
+    background: none;
+    border: none;
+    font-size: $font-size;
+    padding: 10px;
+    color: white;
+
+    @include placeholder {
+        @include placeholder-style;
+    }
+    &:focus {
+        outline: none;
+    }
+}
