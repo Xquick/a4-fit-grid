@@ -10,15 +10,28 @@ $input-class: 'ui-input';
         @include placeholder-style;
     }
     &-value-text {
-        color: white;
         font-size: $font-size;
     }
 }
-.mat-option{
+
+.mat-option {
     max-width: none !important;
 }
+
 .mat-checkbox:not(.mat-checkbox-checked) {
     opacity: 0.2;
+}
+.mat-hint{
+    .error{
+        color: $color-error;
+    }
+}
+.mat-input-wrapper {
+    width: 100%;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 input {

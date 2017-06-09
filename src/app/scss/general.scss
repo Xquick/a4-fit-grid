@@ -7,6 +7,15 @@ html {
     height: 100vh
 }
 
+body, .ui-content {
+    background: #e3e9ee;
+}
+
+.ui-content{
+    overflow: auto;
+    height: 100%;
+}
+
 body {
     position: absolute;
     top: 0;
@@ -71,10 +80,11 @@ body {
     display: inline-block;
 }
 
+.width-100 {
+    width: 100%;
+}
 
 @media(max-width: 991px) {
-    .ui-map {
 
-    }
 }
 

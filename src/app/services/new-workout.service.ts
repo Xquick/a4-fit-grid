@@ -1,13 +1,14 @@
 import {CacheService} from "./cache.service";
-import {Exercise} from "../dto/exercise.dto";
+import {Exercise} from "../dao/exercise.dao";
 import {common} from "../interfaces/common.interface";
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import {Inject, OnInit} from "@angular/core";
-import IExerciseSchedule = common.IExerciseSchedule;
+import IExerciseSchedule = common.ISchedule;
 import ICurrentWorkout = common.ICurrentWorkout;
 import {DataService} from "./data.service";
-import {Plan} from "../dto/plan.dto";
+import {Plan} from "../dao/plan.dao";
+import {Workout} from "../dao/workout.dao";
 
 
 export interface IExerciseCheckboxMap {
@@ -72,10 +73,11 @@ export class NewWorkoutService {
         });
     }
 
-    public saveCurrentWorkout(workoutDate: Date, selectedPlan: Plan) {
+    public saveCurrentWorkout(workoutDate: Date, selectedPlan: Plan, selectedWorkout: Workout) {
         if (workoutDate) {
             this._currentWorkout.date = moment.unix(workoutDate.getTime() / 1000);
         }
+
         if (selectedPlan) {
             this.currentWorkout.plan = selectedPlan;
         }
@@ -83,6 +85,8 @@ export class NewWorkoutService {
         this.dataService.persistWorkout(this._currentWorkout).subscribe(() => {
             this.cacheService.updateCacheExerciseHistory(this._currentWorkout);
             this.cacheService.cacheUserPlans();
+            this.updateCheckboxMap();
+
             //clear workout after it is saved
             this.initCurrentWorkout();
         });

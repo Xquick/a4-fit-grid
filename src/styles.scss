@@ -3,11 +3,10 @@
 @include mat-core();
 $primary: mat-palette($mat-blue-grey, 500);
 $accent:  mat-palette($mat-amber, A100);
-$warn:    mat-palette($mat-orange, A200);
+$warn:    mat-palette($mat-red, A200);
 $theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
-
 
 @import 'app/scss/mixins';
 @import 'app/scss/variables';
@@ -20,10 +19,9 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @import 'app/scss/input';
 @import 'app/scss/icon';
 @import 'app/scss/menu';
-@import 'app/scss/components/filter';
 @import 'app/scss/components/workout';
 @import 'app/scss/components/snackBar';
-@import 'app/scss/dialog/md-dialog';
 @import 'app/scss/table';
 @import 'app/scss/dragDrop';
 @import 'app/scss/layout';
+@import 'app/scss/pages/plans';

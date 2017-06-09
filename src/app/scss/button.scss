@@ -18,8 +18,8 @@ $buttonclass: ".ui-button";
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
 
     &--default.md-button{
-        background: $color-1;
-        background-color: $color-1;
+        background: $color-primary;
+        background-color: $color-primary;
         color: white;
         md-icon{
             color: $color-white;
@@ -33,7 +33,7 @@ $buttonclass: ".ui-button";
         padding: 5px;
 
         i {
-            color: $color-1;
+            color: $color-primary;
         }
     }
 }

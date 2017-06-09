@@ -41,14 +41,16 @@
         </md-toolbar-row>
 
         <md-toolbar-row fxFlexAlign="stretch">
-            <input mdInput
+            <input fxFlex="80" mdInput
                    [(ngModel)]="selectedDate"
                    [mdDatepicker]="picker"
                    (focus)=picker.open()
                    color="primary"
                    [placeholder]="'new-workout.datepicker.placeholder'|translate">
+            <button md-button (click)="picker.open()">
+                <i class="material-icons">date_range</i>
+            </button>
 
-            <button mdSuffix [mdDatepickerToggle]="picker"></button>
         </md-toolbar-row>
     </md-toolbar>
 

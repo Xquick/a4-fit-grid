@@ -1,0 +1,80 @@
+<div class="container"
+     fxFill
+     fxLayoutAlign="center center">
+
+    <md-card fxFlex.gt-xs="50" fxFlex.gt-md="30">
+        <h2 fxLayoutAlign="center center">{{'title.sign-up'|translate}}</h2>
+        <form class=""
+              [formGroup]="formGroup"
+              (ngSubmit)="signUp(formGroup.value)">
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="firstname" type="text" required [placeholder]="'form.firstname'|translate"
+                       formControlName="firstname"/>
+                <md-hint [hidden]="!formGroup.controls.firstname.errors ||
+                                    (!formGroup.controls.firstname.dirty && !formGroup.controls.firstname.touched)">
+                    <span class="error">{{'form.error.required'|translate}}</span>
+                </md-hint>
+
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="lastname" type="text" required [placeholder]="'form.lastname'|translate"
+                       formControlName="lastname" #lastname/>
+                <md-hint [hidden]="!formGroup.controls.lastname.errors ||
+                                    (!formGroup.controls.lastname.dirty && !formGroup.controls.lastname.touched)">
+                    <span class="error">{{'form.error.required'|translate}}</span>
+                </md-hint>
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="username" type="text" required [placeholder]="'form.username'|translate"
+                       formControlName="username" #username/>
+                <md-hint [hidden]="!formGroup.controls.username.errors ||
+                                    (!formGroup.controls.username.dirty && !formGroup.controls.username.touched)">
+                    <span class="error">{{'form.error.required'|translate}}</span>
+                </md-hint>
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="email" type="email" required email [placeholder]="'form.email'|translate"
+                       formControlName="email" #email/>
+                <md-hint [hidden]="!formGroup.controls.email.errors ||
+                                    (!formGroup.controls.email.dirty && !formGroup.controls.email.touched)">
+                    <span [hidden]="(formGroup.controls.email.errors | first) !== 'email'" class="error">{{'form.error.email-format'|translate}}</span>
+                    <span [hidden]="(formGroup.controls.email.errors | first) !== 'required'" class="error">{{'form.error.required'|translate}}</span>
+                </md-hint>
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="password" type="password" required [placeholder]="'form.password'|translate"
+                       formControlName="password" #password/>
+                <md-hint [hidden]="!formGroup.controls.password.errors ||
+                                    (!formGroup.controls.password.dirty && !formGroup.controls.password.touched)">
+                    <span class="error">{{'form.error.required'|translate}}</span>
+                </md-hint>
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="passwordRepeat" type="password" required
+                       [placeholder]="'form.passwordRepeat'|translate"
+                       formControlName="passwordRepeat" required #passwordRepeat/>
+                <md-hint [hidden]="!formGroup.controls.passwordRepeat.errors ||
+                                    (!formGroup.controls.passwordRepeat.dirty && !formGroup.controls.passwordRepeat.touched)">
+
+                    <span [hidden]="(formGroup.controls.passwordRepeat.errors | first) !== 'required'" class="error">{{'form.error.required'|translate}}</span>
+                    <span [hidden]="(formGroup.controls.passwordRepeat.errors | first) !== 'matchPassword'"
+                          class="error">{{'form.error.password-not-matchig'|translate}}</span>
+                </md-hint>
+            </md-input-container>
+
+            <div fxLayoutAlign="center center">
+                <button md-button class="mat-raised-button"
+                        color="accent"
+                        [disabled]="!formGroup.valid"
+                        type="submit">{{'sign-up.submit'|translate}}
+                </button>
+            </div>
+        </form>
+    </md-card>
+</div>

@@ -1,33 +1,36 @@
-body, .ui-content {
-    background: #e3e9ee;
-}
-.ui-content{
-    overflow: auto;
-    height: 100%;
-}
+
 $menu-class: '.main-menu';
 
 .mat-sidenav#{$menu-class} {
-    background-color: $color-1;
+    background-color: $color-primary;
     width: $menu-width;
     height: 100%;
-    padding-top: 10px;
 
-    md-icon, i, div {
+    md-icon, i, span {
         color: $color-white;
     }
 
-    li{
-        margin-bottom: 10px;
-    }
-
-    &-item {
+    .main-menu-item {
         text-align: center;
+
+        &.active{
+            background: $color-primary--highlight;
+        }
+
+        button{
+            padding: 10px 0;
+            min-width: 0;
+            width: 100%;
+        }
+
         &-icon {
             font-size: 30px;
         }
+
         &-label {
-            font-size: 12px;
+            font-size: $font-size - 2;
+            line-height: $font-size - 2;
+            color: white;
         }
     }
 }

@@ -1,5 +1,4 @@
-<md-sidenav-container>
-
+<md-sidenav-container >
     <!--Main Menu-->
     <md-sidenav #left align="start"
                 mode="push"
@@ -7,7 +6,7 @@
                 fxLayout="column"
                 fxLayoutAlign="space-between center"
                 class="md-sidenav-left main-menu">
-        <main-menu></main-menu>
+        <main-menu (onToggleWokoutSidenav)="sidenav.toggle()"></main-menu>
     </md-sidenav>
 
     <!--New Workout-->
@@ -15,20 +14,11 @@
                 mode="over"
                 align="end"
                 opened="true">
-        <new-workout (onCloseSidenav)="sidenav.close()"></new-workout>
+        <new-workout *ngIf="isAuthenticated" (onCloseSidenav)="sidenav.close()"></new-workout>
     </md-sidenav>
 
     <!--Content-->
     <div class="ui-content">
-        <div fxLayout="row">
-            <button color="accent"
-                    md-raised-button
-                    class="fixed fixed--right-top"
-                    (click)="sidenav.toggle();"
-                    aria-label="close">
-                {{sidenav.opened ? ('new-workout.close'|translate): ('new-workout.open'|translate)}}
-            </button>
-        </div>
         <div fxLayout="row">
             <router-outlet></router-outlet>
         </div>

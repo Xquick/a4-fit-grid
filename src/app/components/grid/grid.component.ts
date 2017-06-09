@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 
 import * as moment from 'moment';
-import {Exercise} from "../../dto/exercise.dto";
+import {Exercise} from "../../dao/exercise.dao";
 import {common} from "../../interfaces/common.interface";
 import {FIT_CONFIG} from "../../app.config";
 import * as _ from 'underscore';
@@ -10,7 +10,7 @@ import ICurrentWorkout = common.ICurrentWorkout;
 import {NewWorkoutService, IExerciseCheckboxMap} from "../../services/new-workout.service";
 
 import IExerciseType = common.IExerciseType;
-import IExerciseSchedule = common.IExerciseSchedule;
+import IExerciseSchedule = common.ISchedule;
 import ICalendarDays = common.ICalendarDays;
 
 @Component({
@@ -28,7 +28,6 @@ export class GridComponent implements OnInit {
     constructor(private cacheService: CacheService,
                 private newWorkoutService: NewWorkoutService) {
     }
-
 
     ngOnInit(): void {
         this.cacheService.exerciseList.subscribe((exerciseList: Exercise[]) => {
@@ -51,17 +50,18 @@ export class GridComponent implements OnInit {
     }
 
     private initHistoryDates() {
-        for (let i = 0; i < FIT_CONFIG.numberOfHistoryDays; i++) {
-            let date: moment.Moment = moment();
+        if (this.calendarDays.length === 0) {
+            for (let i = 0; i < FIT_CONFIG.numberOfHistoryDays; i++) {
+                let date: moment.Moment = moment();
 
-            date = date.subtract(i, 'days');
+                date = date.subtract(i, 'days');
 
-            let calendarDay: ICalendarDays = <ICalendarDays>{};
-            calendarDay.date = date;
-            calendarDay.weekday = date.day();
-            calendarDay.abbreviation = "";
-            this.calendarDays.push(calendarDay);
+                let calendarDay: ICalendarDays = <ICalendarDays>{};
+                calendarDay.date = date;
+                calendarDay.weekday = date.day();
+                calendarDay.abbreviation = "";
+                this.calendarDays.push(calendarDay);
+            }
         }
     }
-
 }

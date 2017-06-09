@@ -1,31 +1,94 @@
 <app-header [appTitle]="'title.plans'|translate"></app-header>
 
 <div id="plans">
-    <div fxLayoutWrap fxLayoutGap="10px" class="container">
-        <md-card fxFlex="calc(50% - 10px)" *ngFor="let plan of userPlans" class="exercise-type-wrapper">
+    <div fxFill fxLayoutWrap fxLayoutGap="10px" class="container">
+        <md-card fxFlex="100">
             <md-card-content>
-                <h2 layout="row">{{plan.name}}</h2>
-                <md-card *ngFor="let workout of plan.workoutList">
-                    <md-card-content>
-                        <h3 layout="row">{{workout.name}}</h3>
-
-                        <table md-table="md-table" md-row-select="md-row-select" multiple="multiple">
-                            <thead md-head="md-head">
-                            <tr md-row="md-row">
-                                <th md-column="md-column"></th>
-                            </tr>
-                            </thead>
-                            <tbody md-body="md-body">
-                            <tr *ngFor="let exercise of workout.exerciseList"
-                                md-row="md-row"
-                                class="exercise md-table-content-row">
-                                <td md-cell="md-cell">{{exercise.name}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </md-card-content>
-                </md-card>
+                <md-select [placeholder]="'plans.plan'|translate"
+                           [(ngModel)]="selectedPlan"
+                           color="primary">
+                    <md-option *ngFor="let plan of userPlans;"
+                               fxFlex="80"
+                               [value]="plan"
+                               fxLayout="column">{{plan.name}}
+                    </md-option>
+                </md-select>
             </md-card-content>
+        </md-card>
+        <md-card fxFlex="100">
+
+            <md-tab-group *ngIf="selectedPlan" fxFill>
+                <md-tab *ngFor="let workoutGroup of selectedPlan.workoutGroups" [label]="workoutGroup.name">
+                    <h2></h2>
+                    <button md-button
+                            color="accent"
+                            class="mat-raised-button">
+                        {{'plans.new-workout'|translate}}
+                    </button>
+
+                    <md-card fxFlex="50" fxLayoutGap="10px" *ngFor="let workout of workoutGroup.workouts">
+                        <md-card-title>{{workout.name}}
+                            <button md-button>
+                                <i fxLayout="column" fxFlex="20" class="material-icons">date_range</i>
+                            </button>
+                        </md-card-title>
+
+                        <md-card-content>
+                            <ngx-datatable #myTable
+                                           class='material expandable'
+                                           [rows]="workout.exercises">
+
+                                <ngx-datatable-column
+                                        [width]="50"
+                                        [resizeable]="false"
+                                        [sortable]="false"
+                                        [draggable]="false"
+                                        [canAutoResize]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <i (click)="toggleExpandRow(row)"
+                                           class="material-icons"
+                                           [innerHTML]="row.$$expanded ? 'keyboard_arrow_up':'keyboard_arrow_down'"></i>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column
+                                        prop="name">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <ng-template let-row="row"
+                                                     let-value="value"
+                                                     ngx-datatable-cell-template>
+                                        </ng-template>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-row-detail [rowHeight]="100"
+                                                          #myDetailRow
+                                                          (toggle)="onDetailToggle($event)">
+                                    <ng-template let-row="row"
+                                                 ngx-datatable-row-detail-template>
+                                        <div style="padding-left:35px;">
+                                            <table md-table="md-table"
+                                                   md-row-select="md-row-select"
+                                                   multiple="multiple">
+                                                <tbody md-body="md-body">
+                                                <tr class="exercise md-table-content-row"
+                                                    md-row="md-row"
+                                                    *ngFor="let set of row.sets">
+                                                    <td md-cell="md-cell">{{set.setNumber + 1}}</td>
+                                                    <td md-cell="md-cell">{{set.repCount}}x</td>
+                                                    <td md-cell="md-cell">{{set.weight}}Kg</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ng-template>
+                                </ngx-datatable-row-detail>
+                            </ngx-datatable>
+
+                        </md-card-content>
+                    </md-card>
+                </md-tab>
+            </md-tab-group>
         </md-card>
     </div>
 </div>

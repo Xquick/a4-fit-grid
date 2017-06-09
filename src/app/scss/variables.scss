@@ -1,14 +1,12 @@
 //Dimensions
 $radius: 3px;
-$menu-width: 60px;
+$menu-width: 70px;
 
 //Color palette
 $color-background: #F3F3F3;
 $color-post: #FFFFFF;
-$color-1: #576779;
 $color-2: #8faec9;
 $color-3: #676767;
-$color-error: #FF6363;
 $color-success: #66D14F;
 $color-like: #E96B6B;
 $color-button: #F7F7F7;
@@ -17,6 +15,10 @@ $color-white: #FFFFFF;
 
 $color-border: mat-color($primary, 50);
 $color-accent: mat-color($accent, 400);
+$color-primary: mat-color($primary, 500);
+$color-primary--highlight: mat-color($primary, 400);
+$color-error:  mat-color($warn, 400);
+
 $button-height: 40px;
 
 $font-size: 14px;

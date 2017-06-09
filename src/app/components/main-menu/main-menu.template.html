@@ -1,15 +1,47 @@
-<div flex="100" class="ui-list ui-list--plain">
-    <li>
-        <a routerLink="grid" title="grid_header" class="main-menu-item"><i
-                class="material-icons main-menu-item-icon">assignment</i>
-            <div class="main-menu-item-label">{{'menu.grid'|translate}}</div>
-        </a>
-    </li>
+<div fxFill fxLayout="column">
+    <div fxLayout="row" fxFlex>
+        <div fxLayout="column" fxFlex="100" fxLayoutAlign="start center">
+            <ng-container *ngIf="isAuthenticated">
 
-    <li>
-        <a routerLink="plans" title="grid_header" class="main-menu-item"><i
-                class="material-icons main-menu-item-icon">fitness_center</i>
-            <div class="main-menu-item-label">{{'menu.plans'|translate}}</div>
-        </a>
-    </li>
+                <menu-item [routeName]="'menu.new-workout'|translate"
+                           iconClass="material-icons"
+                           (click)="toggleWorkoutSidenav()"
+                           iconName="open_in_new"></menu-item>
+
+                <menu-item [routeName]="'menu.grid'|translate"
+                           routePath="grid"
+                           iconClass="material-icons"
+                           iconName="assignment"></menu-item>
+
+                <menu-item [routeName]="'menu.plans'|translate"
+                           routePath="plans"
+                           iconClass="material-icons"
+                           iconName="fitness_center"></menu-item>
+            </ng-container>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxFlex>
+        <div fxLayout="column" fxFlex="100" fxLayoutAlign="end center">
+
+            <ng-container *ngIf="!isAuthenticated; else authenticated">
+                <menu-item [routeName]="'menu.sign-up'|translate"
+                           routePath="sign-up"
+                           iconClass="mdi mdi-account-plus"
+                           iconName=""></menu-item>
+
+                <menu-item [routeName]="'menu.login'|translate"
+                           routePath="login"
+                           iconClass="mdi mdi-login"
+                           iconName=""></menu-item>
+            </ng-container>
+
+            <ng-template #authenticated>
+                <menu-item [routeName]="'menu.logout'|translate"
+                           (click)="logout()"
+                           iconClass="mdi mdi-logout"
+                           iconName=""></menu-item>
+            </ng-template>
+        </div>
+    </div>
 </div>

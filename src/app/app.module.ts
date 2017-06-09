@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule, Http} from '@angular/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
@@ -13,7 +13,7 @@ import {AppHeaderComponent} from "./components/header/app-header.directive";
 import {
     MdCoreModule, MdButtonModule, MdCheckboxModule, MdCardModule, MdRadioModule, MdSlideToggleModule,
     MdIconRegistry, MdDatepickerModule, MdIconModule, MdSidenavModule, MdInputModule, MdNativeDateModule, MdToolbar,
-    MdToolbarModule, MdSelectModule, MdSnackBarModule
+    MdToolbarModule, MdSelectModule, MdSnackBarModule, MdListModule, MdTabsModule
 } from '@angular/material';
 
 
@@ -32,6 +32,15 @@ import {NewWorkoutService} from "./services/new-workout.service";
 import {FormatDatePipe} from "./pipes/format-date.pipe";
 import {MockDataService} from "./mock/data.service.mock";
 import {SnackBarService} from "./services/snackbar.service";
+import {AuthGuard} from "./guards/auth.guard";
+import {LoginComponent} from "./components/login/login.component";
+import {AuthService} from "./services/auth.service";
+import {MenuItemComponent} from "./components/main-menu/menu-item/menu-item.component";
+import {SignUpComponent} from "./components/sign-up/sign-up.component";
+import {FirstKeyPipe} from "./pipes/first.pipe";
+import {AuthHttp, AuthConfig, JwtHelper} from "angular2-jwt";
+import {AuthModule} from "./modules/auth.module";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 
 export function HttpLoaderFactory(http: Http) {
@@ -42,12 +51,16 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
         AppComponent,
         AutoGrowDirective,
+        MenuItemComponent,
         GridComponent,
         PlansComponent,
         MainMenuComponent,
         AppHeaderComponent,
         NewWorkoutComponent,
-        FormatDatePipe
+        LoginComponent,
+        SignUpComponent,
+        FormatDatePipe,
+        FirstKeyPipe
     ],
     imports: [
         BrowserModule,
@@ -62,23 +75,41 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         RouterModule.forRoot([
+
             {
                 path: 'grid',
-                component: GridComponent
+                component: GridComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'plans',
-                component: PlansComponent
+                component: PlansComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'login',
+                component: LoginComponent
+            },
+            {
+                path: 'sign-up',
+                component: SignUpComponent
+            },
+            {
+                path: '',
+                redirectTo: '/grid',
+                pathMatch: 'full'
             }]
         ),
-        /** Material */
         MdCoreModule, MdDatepickerModule, MdIconModule, MdInputModule, MdCardModule,
         MdCheckboxModule, MdRadioModule, MdButtonModule, MdSlideToggleModule,
-        MdSidenavModule, MdNativeDateModule, MdToolbarModule, MdSelectModule,
-        FlexLayoutModule, MdSnackBarModule,
-        DndModule.forRoot()
+        MdSidenavModule, MdNativeDateModule, MdToolbarModule, MdSelectModule, MdListModule,MdTabsModule,
+        FlexLayoutModule, MdSnackBarModule, ReactiveFormsModule, FormsModule,AuthModule,
+        DndModule.forRoot(), NgxDatatableModule
     ],
-    providers: [DataService, CacheService, NewWorkoutService, MdIconRegistry, MockDataService, SnackBarService,
+    providers: [
+        DataService, CacheService, NewWorkoutService,
+        MdIconRegistry, MockDataService, SnackBarService,
+        AuthGuard, AuthService,
         {provide: IAppConfig, useValue: FIT_CONFIG}],
     bootstrap: [AppComponent]
 })

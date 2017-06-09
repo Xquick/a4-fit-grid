@@ -1,0 +1,13 @@
+<div class="main-menu-item"
+     [routerLinkActive]="routePath? 'active': 'null'"
+     [routerLinkActiveOptions]="{exact: true}">
+
+    <button md-button [(routerLink)]="routePath"
+            title="grid_header">
+        <span fxLayoutAlign="center center"
+              fxLayout="column">
+            <i class="{{iconClass}}">{{iconName}}</i>
+            <span class="main-menu-item-label">{{routeName}}</span>
+        </span>
+    </button>
+</div>

@@ -1,0 +1,23 @@
+<div class="container"
+     fxFill
+     fxLayoutAlign="center center">
+
+    <md-card fxFlex.gt-xs="50" fxFlex.gt-md="30">
+        <h2 fxLayoutAlign="center center">{{'title.login'|translate}}</h2>
+        <form class=""
+              [formGroup]="formGroup"
+              (ngSubmit)="login(formGroup.value)">
+            <md-input-container fxLayout="row">
+                <input mdInput name="username" type="text" [placeholder]="'form.username'|translate" formControlName="username"/>
+            </md-input-container>
+
+            <md-input-container fxLayout="row">
+                <input mdInput name="password" type="password" [placeholder]="'form.password'|translate" formControlName="password"/>
+            </md-input-container>
+            <div fxLayoutAlign="center center">
+                <button md-button class="mat-raised-button" color="accent" type="submit">{{'login.submit'|translate}}
+                </button>
+            </div>
+        </form>
+    </md-card>
+</div>

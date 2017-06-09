@@ -1,31 +1,72 @@
 import * as moment from "moment";
-import {Exercise} from "../dto/exercise.dto";
-import {Plan} from "../dto/plan.dto";
 
 export namespace common {
-    export interface IExercise {
+
+    export interface ISchedule {
+        id: number;
+        date: moment.Moment;
+        workout: IWorkout;
+    }
+
+    export interface IWorkoutGroup {
         id: number;
         name: string;
-        type: string;
-        schedule: IExerciseSchedule[];
+        workouts: IWorkout[];
     }
 
     export interface IWorkout {
         id: number;
         name: string;
-        exerciseList: IExercise[];
+        exercises: IExercise[];
+    }
+
+    export interface IExercise {
+        id: number;
+        name: string;
+        type: string;
+        schedule: IExerciseSchedule[];
+        sets: ISet[];
     }
 
     export interface IPlan {
         id: number;
         name: string;
-        workoutList: IWorkout[];
+        workoutGroups: IWorkoutGroup[];
     }
+
+    export interface IExerciseSchedule {
+        date: moment.Moment;
+        sets: ISet[]
+    }
+
+    export interface IExerciseType {
+        name: string;
+        exercises: IExercise[];
+    }
+
+    export interface ICalendarDays {
+        weekday: number;
+        date: moment.Moment;
+        abbreviation: string;
+    }
+
+    export interface ISet {
+        setNumber: number;
+        repCount: number;
+        weight: number;
+    }
+
+    export interface IScheduledSet {
+        setNumber: number;
+        repCount: number;
+        weight: number;
+    }
+
 
     export interface ICurrentWorkout {
         date: moment.Moment;
         name: string;
-        plan: Plan;
+        plan: IPlan;
         exerciseList: ICurrentWorkoutExercise[];
     }
 
@@ -35,27 +76,4 @@ export namespace common {
         type: string;
         isSuperset: boolean;
     }
-
-    export interface IExerciseSchedule {
-        date: moment.Moment;
-        setList: ISet[]
-    }
-
-    export interface IExerciseType {
-        name: string;
-        exerciseList: Exercise[];
-    }
-
-    export interface ICalendarDays {
-        weekday: number;
-        date: moment.Moment;
-        abbreviation: string;
-    }
-    export interface ISet {
-        id: number;
-        setNumber: number;
-        repCount: number;
-        weight: number;
-    }
-
 }

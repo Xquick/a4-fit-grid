@@ -1,6 +1,6 @@
 import {common} from "../interfaces/common.interface";
 import {Inject} from "@angular/core";
-import IExerciseSchedule = common.IExerciseSchedule;
+import IExerciseSchedule = common.ISchedule;
 import ICurrentWorkout = common.ICurrentWorkout;
 import {NewWorkoutService} from "../services/new-workout.service";
 import {MockCacheService} from "./cache.service.mock";
